@@ -1,0 +1,40 @@
+name: Build Hadal Vault
+
+on:
+  push:
+    paths:
+      - 'tools/generate_hadal_vault.py'
+      - '.github/workflows/build-hadal-vault.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Generate Hadal vault
+        run: python tools/generate_hadal_vault.py
+
+      - name: Commit generated notes
+        run: |
+          git config user.name "Hadal Vault Builder"
+          git config user.email "actions@users.noreply.github.com"
+          git add Hadal
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "Generate 1000+ interconnected Hadal notes"
+          git push
