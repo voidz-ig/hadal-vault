@@ -8,14 +8,14 @@
   "collapse-color-groups": false,
   "colorGroups": [
     {
-      "query": "path:\"Blue Test Note.md\"",
+      "query": "tag:#blue-test",
       "color": {
         "a": 1,
         "rgb": 255
       }
     },
     {
-      "query": "path:\"Red Test Note.md\"",
+      "query": "tag:#red-test",
       "color": {
         "a": 1,
         "rgb": 16711680
